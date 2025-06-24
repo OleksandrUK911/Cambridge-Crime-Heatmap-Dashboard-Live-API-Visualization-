@@ -2,8 +2,8 @@
 
 An interactive Streamlit dashboard that visualizes real-time crime data in Cambridge, UK using the UK Police API and Folium heatmaps.
 
-## 📉 Live Project Demo
-Try the live app: [https://yourusername.streamlit.app](https://yourusername.streamlit.app) *(update after deployment)*
+## 🔗 Live App
+[https://cambridge-crime-heatmap.streamlit.app](https://cambridge-crime-heatmap.streamlit.app)
 
 ---
 
