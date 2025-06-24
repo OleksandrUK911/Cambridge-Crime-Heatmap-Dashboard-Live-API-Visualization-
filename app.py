@@ -13,7 +13,10 @@ st.markdown("Дані отримано в реальному часі з UK Poli
 @st.cache_data(ttl=3600)
 def fetch_crime_data():
     poly = "52.209,0.123:52.202,0.117:52.206,0.130"
-    date = pd.Timestamp.today().strftime("%Y-%m")
+    
+    # 🔧 ТУТ встановлюємо стабільну дату (остання з доступних)
+    date = "2024-12"
+    
     url = f"https://data.police.uk/api/crimes-street/all-crime?poly={poly}&date={date}"
     response = requests.get(url)
 
@@ -23,6 +26,7 @@ def fetch_crime_data():
 
     data = response.json()
     df = pd.json_normalize(data)
+
     if df.empty:
         return pd.DataFrame()
 
@@ -31,6 +35,7 @@ def fetch_crime_data():
     df["latitude"] = df["latitude"].astype(float)
     df["longitude"] = df["longitude"].astype(float)
     df["date"] = pd.to_datetime(df["date"])
+
     return df
 
 df = fetch_crime_data()
