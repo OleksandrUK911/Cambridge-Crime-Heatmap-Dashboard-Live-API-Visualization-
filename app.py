@@ -102,3 +102,27 @@ with tabs[4]:
     st.subheader("🔝 Найнебезпечніші вулиці")
     top_streets = df["street"].value_counts().head(10)
     st.bar_chart(top_streets)
+
+# --- Додаткові поля для аналітики ---
+st.markdown("---")
+st.header("📊 Додаткова аналітика")
+
+# Статистика по типах злочинів
+st.subheader("Розподіл за типами злочинів")
+crime_counts = df["crime_type"].value_counts()
+st.bar_chart(crime_counts)
+
+# Розподіл по днях тижня
+st.subheader("Розподіл за днями тижня")
+df["weekday"] = df["date"].dt.day_name()
+weekday_counts = df["weekday"].value_counts().reindex([
+    "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+], fill_value=0)
+st.line_chart(weekday_counts)
+
+# Коротка аналітика
+st.subheader("Коротка статистика")
+col1, col2, col3 = st.columns(3)
+col1.metric("Всього інцидентів", len(df))
+col2.metric("Унікальних вулиць", df["street"].nunique())
+col3.metric("Типів злочинів", df["crime_type"].nunique())
